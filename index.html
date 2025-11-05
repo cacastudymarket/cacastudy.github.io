@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cahya Ratri Lukita Putri - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #7ec850; /* Stardew Green */
+            --secondary: #ff4655; /* Valorant Red */
+            --accent: #fdce4b; /* Stardew Yellow */
+            --dark: #1c1c1c;
+            --light: #f5f5f5;
+            --text: #333;
+            --bg: #fff;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            --primary: #7ec850;
+            --secondary: #ff4655;
+            --accent: #fdce4b;
+            --dark: #f5f5f5;
+            --light: #1c1c1c;
+            --text: #f5f5f5;
+            --bg: #121212;
+            --card-bg: rgba(30, 30, 30, 0.9);
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: var(--transition);
+            overflow-x: hidden;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231c1c1c" opacity="0.05"/><path d="M0 0L100 100M100 0L0 100" stroke="%237ec850" stroke-width="0.5" opacity="0.1"/></svg>');
+        }
+
+        .dark-mode body {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f5f5f5" opacity="0.05"/><path d="M0 0L100 100M100 0L0 100" stroke="%23ff4655" stroke-width="0.5" opacity="0.1"/></svg>');
+        }
+
+        h1, h2, h3 {
+            font-family: 'Press Start 2P', cursive;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            text-shadow: 2px 2px 0 var(--dark);
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin-top: 2rem;
+        }
+
+        h3 {
+            font-size: 1rem;
+            color: var(--accent);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-character {
+            width: 100px;
+            height: 100px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            position: relative;
+            animation: bounce 1s infinite alternate;
+            margin-bottom: 20px;
+        }
+
+        .loading-character::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            top: 20px;
+            left: 35px;
+        }
+
+        .loading-character::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 40px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            bottom: 10px;
+            left: 20px;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 10px;
+            background-color: var(--light);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .loading-progress {
+            height: 100%;
+            width: 0%;
+            background-color: var(--primary);
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-20px); }
+        }
+
+        /* Header */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle, .language-toggle {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 1rem;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover, .language-toggle:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+        }
+
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary);
+            box-shadow: 0 0 20px rgba(126, 200, 80, 0.5);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(126, 200, 80, 0.8);
+        }
+
+        .profile-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            color: var(--text);
+            margin: 0 0.5rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            color: var(--light);
+            transform: translateY(-5px);
+        }
+
+        /* Sections */
+        section {
+            padding: 3rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-left: 4px solid var(--primary);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-category h3 i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-item {
+            background-color: var(--light);
+            color: var(--dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .skill-item:hover {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+
+        .dark-mode .skill-item {
+            background-color: var(--dark);
+            color: var(--light);
+        }
+
+        .experience-item, .project-item {
+            margin-bottom: 2rem;
+        }
+
+        .experience-date, .project-date {
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Testimonials */
+        .testimonials-container {
+            position: relative;
+            overflow: hidden;
+            padding: 2rem 0;
+        }
+
+        .testimonials-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial {
+            flex: 0 0 100%;
+            padding: 0 1rem;
+        }
+
+        .testimonial-content {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .testimonial-content::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--primary);
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            opacity: 0.3;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+            border: 2px solid var(--primary);
+        }
+
+        .testimonial-info h4 {
+            margin-bottom: 0.2rem;
+            font-size: 1rem;
+        }
+
+        .testimonial-info p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--light);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .slider-dot.active {
+            background-color: var(--primary);
+        }
+
+        .dark-mode .slider-dot {
+            background-color: var(--dark);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--light);
+            border-radius: 5px;
+            background-color: var(--card-bg);
+            color: var(--text);
+            transition: var(--transition);
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .dark-mode .form-control {
+            border-color: var(--dark);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(126, 200, 80, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--card-bg);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: var(--text);
+            opacity: 0.7;
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: fixed;
+            z-index: -1;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+            color: var(--primary);
+        }
+
+        .floating-element:nth-child(2) {
+            top: 20%;
+            right: 10%;
+            animation-delay: -5s;
+            color: var(--secondary);
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 30%;
+            left: 15%;
+            animation-delay: -10s;
+            color: var(--accent);
+        }
+
+        .floating-element:nth-child(4) {
+            bottom: 20%;
+            right: 5%;
+            animation-delay: -15s;
+            color: var(--primary);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(10px, 10px) rotate(90deg);
+            }
+            50% {
+                transform: translate(0, 20px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-10px, 10px) rotate(270deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                margin-top: 1rem;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .theme-toggle, .language-toggle {
+                margin-left: 0.5rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.2rem;
+            }
+            
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-character"></div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+        <p>Welcome to the club!</p>
+    </div>
+
+    <!-- Floating Elements -->
+    <div class="floating-element">
+        <i class="fas fa-leaf fa-3x"></i>
+    </div>
+    <div class="floating-element">
+        <i class="fas fa-crosshairs fa-3x"></i>
+    </div>
+    <div class="floating-element">
+        <i class="fas fa-chart-line fa-3x"></i>
+    </div>
+    <div class="floating-element">
+        <i class="fas fa-coins fa-3x"></i>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Cacastdy<span>Portfolio</span></div>
+                <ul class="nav-links">
+                    <li><a href="#about" data-lang-id="nav-about">Tentang</a></li>
+                    <li><a href="#skills" data-lang-id="nav-skills">Keahlian</a></li>
+                    <li><a href="#experience" data-lang-id="nav-experience">Pengalaman</a></li>
+                    <li><a href="#projects" data-lang-id="nav-projects">Proyek</a></li>
+                    <li><a href="#testimonials" data-lang-id="nav-testimonials">Testimoni</a></li>
+                    <li><a href="#contact" data-lang-id="nav-contact">Kontak</a></li>
+                </ul>
+                <div class="header-controls">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="language-toggle" id="languageToggle">
+                        <i class="fas fa-globe"></i>
+                    </button>
+                    <div class="mobile-menu" id="mobileMenu">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="profile-container">
+                <img src="https://api.dicebear.com/7.x/lorelei/svg?seed=Cahya&backgroundColor=ff9eb5" alt="Cahya Ratri" class="profile-img">
+                <h1>Cahya Ratri Lukita Putri</h1>
+                <p class="profile-title" data-lang-id="hero-title">Data Analyst & Finance Specialist</p>
+                <p data-lang-id="hero-desc">Data Analyst & Finance Specialist dengan pengalaman kuat dalam analitik data, pelatihan AI keuangan perusahaan, trading kuantitatif, dan penelitian Web3. Terampil dalam mengubah kumpulan data kompleks menjadi dashboard yang berwawasan, model risiko, dan strategi keuangan.</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/cahyaratrilukitaputri" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/cacastudymarket" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.instagram.com/cahyaratry__" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="mailto:cahvaratrilukitaputri@gmail.com"><i class="far fa-envelope"></i></a>
+                    <a href="https://wa.me/6281216631921" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title" data-lang-id="about-title">Tentang Saya</h2>
+            <div class="card">
+                <p data-lang-id="about-desc1">Saya adalah seorang Data Analyst & Finance Specialist dengan pengalaman yang kuat di berbagai bidang seperti analitik data, pelatihan AI keuangan perusahaan, trading kuantitatif, dan penelitian Web3. Saya terampil dalam mengubah kumpulan data kompleks menjadi dashboard yang berwawasan, model risiko, dan strategi keuangan.</p>
+                <p data-lang-id="about-desc2">Saya berpengalaman bekerja secara remote dengan klien global dalam proyek yang melibatkan penelitian investasi, peramalan, anotasi AI/ML, dan optimasi kinerja. Saya mahir dalam Python, SQL, Power BI, Excel, dan Google Data Studio. Saya ahli dalam memberikan hasil yang terukur melalui ketepatan analitis dan pola pikir yang didorong oleh data.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title" data-lang-id="skills-title">Keahlian</h2>
+            <div class="skills-container">
+                <div class="skill-category card">
+                    <h3><i class="fas fa-code"></i> <span data-lang-id="skills-programming">Pemrograman</span></h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Python (Pandas, NumPy, Matplotlib, TA-Lib)</span>
+                        <span class="skill-item">SQL</span>
+                        <span class="skill-item">R</span>
+                    </div>
+                </div>
+                <div class="skill-category card">
+                    <h3><i class="fas fa-chart-bar"></i> <span data-lang-id="skills-analytics">Analitik & Visualisasi</span></h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Excel</span>
+                        <span class="skill-item">Google Sheets</span>
+                        <span class="skill-item">Power BI</span>
+                        <span class="skill-item">Looker Studio</span>
+                        <span class="skill-item">Miro</span>
+                        <span class="skill-item">Tableau</span>
+                    </div>
+                </div>
+                <div class="skill-category card">
+                    <h3><i class="fas fa-coins"></i> <span data-lang-id="skills-finance">Keuangan & Trading</span></h3>
+                    <div class="skill-list">
+                        <span class="skill-item">MetaTrader 5 (MT5)</span>
+                        <span class="skill-item">TradingView</span>
+                        <span class="skill-item">Google Finance</span>
+                        <span class="skill-item">Yahoo Finance API</span>
+                    </div>
+                </div>
+                <div class="skill-category card">
+                    <h3><i class="fas fa-cube"></i> <span data-lang-id="skills-web3">Web3 & Penelitian</span></h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Dune Analytics</span>
+                        <span class="skill-item">Nansen</span>
+                        <span class="skill-item">CoinMarketCap</span>
+                        <span class="skill-item">CoinGecko</span>
+                        <span class="skill-item">Crypto Bubble</span>
+                        <span class="skill-item">Metamask</span>
+                        <span class="skill-item">Pumpfun</span>
+                    </div>
+                </div>
+                <div class="skill-category card">
+                    <h3><i class="fas fa-users"></i> <span data-lang-id="skills-collaboration">Kolaborasi</span></h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Jira</span>
+                        <span class="skill-item">Slack</span>
+                        <span class="skill-item">Notion</span>
+                        <span class="skill-item">Git/GitHub</span>
+                        <span class="skill-item">Discord</span>
+                        <span class="skill-item">Docker</span>
+                    </div>
+                </div>
+                <div class="skill-category card">
+                    <h3><i class="fas fa-star"></i> <span data-lang-id="skills-core">Keterampilan Inti</span></h3>
+                    <div class="skill-list">
+                        <span class="skill-item" data-lang-id="skill-data-analysis">Analisis Data</span>
+                        <span class="skill-item" data-lang-id="skill-financial-analysis">Analisis Keuangan</span>
+                        <span class="skill-item" data-lang-id="skill-quantitative-research">Penelitian Kuantitatif</span>
+                        <span class="skill-item" data-lang-id="skill-investment-analysis">Analisis Investasi</span>
+                        <span class="skill-item" data-lang-id="skill-business-analytics">Analisis Bisnis</span>
+                        <span class="skill-item" data-lang-id="skill-forecasting">Peramalan & Regresi</span>
+                        <span class="skill-item" data-lang-id="skill-dashboarding">Dashboard KPI</span>
+                        <span class="skill-item" data-lang-id="skill-risk-modeling">Pemodelan Risiko & Kinerja</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title" data-lang-id="experience-title">Pengalaman Kerja</h2>
+            
+            <div class="experience-item card">
+                <h3>Corporate Finance – AI Trainer</h3>
+                <p class="experience-date">micro1, Remote | Okt 2025 - Sekarang</p>
+                <p data-lang-id="exp-ai-trainer-desc">Melatih dan menguji model AI untuk meningkatkan pemahaman mereka tentang data keuangan dan analisis perusahaan.</p>
+                <ul>
+                    <li data-lang-id="exp-ai-trainer-1">Mengkurasi dan menganotasi kumpulan data keuangan besar untuk meningkatkan akurasi model AI dan kesadaran kontekstual.</li>
+                    <li data-lang-id="exp-ai-trainer-2">Mengembangkan prompt dan use-case yang melibatkan valuasi, peramalan, dan pelaporan keuangan.</li>
+                    <li data-lang-id="exp-ai-trainer-3">Berkolaborasi dengan insinyur dan ilmuwan data untuk menyempurnakan pemahaman model tentang istilah dan logika keuangan.</li>
+                    <li data-lang-id="exp-ai-trainer-4">Meningkatkan akurasi model sebesar 18% dalam menafsirkan data keuangan perusahaan melalui evaluasi iteratif.</li>
+                </ul>
+                <p><strong data-lang-id="tools">Alat:</strong> Python, Excel, Jira, Slack, Financial Databases (Yahoo Finance, EDCAR, Investing.com)</p>
+            </div>
+            
+            <div class="experience-item card">
+                <h3>Web3 & Crypto Research Analyst</h3>
+                <p class="experience-date">Upwork, Remote | Agu 2025 - Sekarang</p>
+                <p data-lang-id="exp-web3-desc">Fokus pada penelitian kuantitatif dan kualitatif di Web3, blockchain, dan ekosistem crypto.</p>
+                <ul>
+                    <li data-lang-id="exp-web3-1">Melakukan analisis proyek DeFi dan Layer-2, mengidentifikasi aset berpotensi tinggi sebelum puncak pasar.</li>
+                    <li data-lang-id="exp-web3-2">Menerapkan model kuantitatif dasar (volatilitas, korelasi, tren volume) untuk evaluasi proyek.</li>
+                    <li data-lang-id="exp-web3-3">Meringkas wawasan dari berita crypto, sentimen sosial, dan data on-chain menjadi briefing investor mingguan.</li>
+                    <li data-lang-id="exp-web3-4">Meningkatkan efisiensi penyaringan sebesar 25% dan memprediksi tren koin yang muncul 1-2 minggu lebih awal.</li>
+                </ul>
+                <p><strong data-lang-id="tools">Alat:</strong> Dune Analytics, Nansen, TradingView, Power BI, Python, Google Sheets</p>
+            </div>
+            
+            <div class="experience-item card">
+                <h3>Junior Business Analyst</h3>
+                <p class="experience-date">Upwork, Remote | Juli 2025 – Agu 2025</p>
+                <p data-lang-id="exp-ba-desc">Membantu bisnis kecil dalam perencanaan strategis berbasis data dan optimasi kinerja.</p>
+                <ul>
+                    <li data-lang-id="exp-ba-1">Melakukan analisis SWOT dan pasar untuk mengidentifikasi ketidakefisienan operasional dan potensi pertumbuhan.</li>
+                    <li data-lang-id="exp-ba-2">Membuat laporan keuangan dan dashboard KPI (penjualan, margin, konversi, CAC) di Power BI.</li>
+                    <li data-lang-id="exp-ba-3">Memberikan rekomendasi yang menghasilkan peningkatan penjualan sebesar 8% dan peningkatan ROI sebesar 12% dalam satu kuartal.</li>
+                </ul>
+                <p><strong data-lang-id="tools">Alat:</strong> Excel, Google Sheets, Power BI, SQL, Canva</p>
+            </div>
+            
+            <div class="experience-item card">
+                <h3>Data Analyst (Project-Based)</h3>
+                <p class="experience-date">Upwork, Remote | Mei 2025 – Jun 2025</p>
+                <ul>
+                    <li data-lang-id="exp-da-1">Membersihkan, menggabungkan, dan menganalisis data multi-sumber dengan Python dan Google Sheets.</li>
+                    <li data-lang-id="exp-da-2">Membangun dashboard Looker Studio interaktif untuk melacak KPI dan tren kinerja.</li>
+                    <li data-lang-id="exp-da-3">Mengembangkan model peramalan yang mencapai akurasi ~90% dan meningkatkan ROI kampanye sebesar 15%.</li>
+                </ul>
+                <p><strong data-lang-id="tools">Alat:</strong> Python (Pandas, NumPy), Power BI, Looker Studio, Excel</p>
+            </div>
+            
+            <div class="experience-item card">
+                <h3>Portfolio & Financial Trader</h3>
+                <p class="experience-date">Independent, Remote | 2024 - Sekarang</p>
+                <p data-lang-id="exp-trader-desc">Mengelola perdagangan multi-aset dan portofolio investasi dengan manajemen risiko yang disiplin.</p>
+                <ul>
+                    <li data-lang-id="exp-trader-1">Perdagangan forex (EUR/USD, USD/JPY), indeks (NASDAQ, S&P 500), komoditas (XAU/USD), dan crypto (BTC/USD).</li>
+                    <li data-lang-id="exp-trader-2">Menggunakan price action, RSI, EMA, MACD, dan indikator fundamental (NFP, CPI, FOMC).</li>
+                    <li data-lang-id="exp-trader-3">Mencapai tingkat kemenangan 71%, ROI bulanan 5-9%, dan mempertahankan drawdown <12%.</li>
+                    <li data-lang-id="exp-trader-4">Melakukan backtesting kuantitatif dan pelacakan kinerja untuk menyempurnakan aturan strategi, mengoptimalkan sinyal masuk/keluar, dan memastikan pengambilan keputusan berbasis data.</li>
+                </ul>
+                <p><strong data-lang-id="tools">Alat:</strong> MT5, TradingView, Excel, Forex Factory, Investing.com</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title" data-lang-id="projects-title">Proyek</h2>
+            
+            <div class="project-item card">
+                <h3>Free-Float Market-Cap FAANG Index (Google Sheets + Python)</h3>
+                <p class="project-date">2025</p>
+                <p data-lang-id="project-faang-desc">Membangun indeks tertimbang free-float market-cap untuk saham FAANG menggunakan Python yfinance dan Google Sheets. Mengotomatiskan pembersihan data, perhitungan bobot, dan pembaruan harian.</p>
+                <p><strong data-lang-id="achievements">Pencapaian:</strong> <span data-lang-id="project-faang-ach">Mengotomatiskan perhitungan indeks dan menghasilkan wawasan kinerja portofolio yang dapat ditindaklanjuti.</span></p>
+            </div>
+            
+            <div class="project-item card">
+                <h3>Dashboard KPI Perusahaan (Power BI)</h3>
+                <p class="project-date">2025</p>
+                <p data-lang-id="project-kpi-desc">Membuat dashboard Power BI interaktif untuk melacak penjualan, margin, konversi, dan metrik kinerja utama lainnya. Menggabungkan data dari beberapa sumber (SQL, Excel, API).</p>
+                <p><strong data-lang-id="achievements">Pencapaian:</strong> <span data-lang-id="project-kpi-ach">Meningkatkan visibilitas data dan mengurangi waktu pelaporan mingguan sebesar 60%.</span></p>
+            </div>
+            
+            <div class="project-item card">
+                <h3>Analisis Risiko Portofolio (Python)</h3>
+                <p class="project-date">2024</p>
+                <p data-lang-id="project-risk-desc">Mengembangkan model risiko portofolio dengan Python untuk menganalisis volatilitas, Value at Risk (VaR), dan diversifikasi.</p>
+                <p><strong data-lang-id="achievements">Pencapaian:</strong> <span data-lang-id="project-risk-ach">Mengidentifikasi risiko yang tidak terlihat dan mengoptimalkan alokasi aset untuk mengurangi volatilitas portofolio sebesar 18%.</span></p>
+            </div>
+            
+            <div class="project-item card">
+                <h3>Dashboard Penelitian Web3 (Dune Analytics + Power BI)</h3>
+                <p class="project-date">2025</p>
+                <p data-lang-id="project-web3-desc">Membangun dashboard penelitian Web3 yang menggabungkan data on-chain (Dune Analytics) dengan data pasar (CoinGecko API) untuk menganalisis tren DeFi dan NFT.</p>
+                <p><strong data-lang-id="achievements">Pencapaian:</strong> <span data-lang-id="project-web3-ach">Mengidentifikasi peluang investasi yang menguntungkan sebelum tren utama dan meningkatkan ROI penelitian sebesar 25%.</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <div class="container">
+            <h2 class="section-title" data-lang-id="testimonials-title">Testimoni Klien</h2>
+            <div class="testimonials-container">
+                <div class="testimonials-slider" id="testimonialsSlider">
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p data-lang-id="testimonial-1">Cahya adalah seorang analis data yang luar biasa. Dia memberikan wawasan mendalam tentang data keuangan kami dan membantu kami meningkatkan efisiensi operasional secara signifikan. Pendekatannya yang detail dan kemampuan teknisnya sangat mengesankan.</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" class="testimonial-avatar">
+                                <div class="testimonial-info">
+                                    <h4>Michael Johnson</h4>
+                                    <p data-lang-id="testimonial-1-role">CEO, FinTech Solutions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p data-lang-id="testimonial-2">Bekerja dengan Cahya adalah pengalaman yang menyenangkan. Dia tidak hanya ahli dalam analisis data tetapi juga memahami kebutuhan bisnis kami. Dashboard yang dia buat membantu tim kami membuat keputusan yang lebih baik dan lebih cepat.</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client" class="testimonial-avatar">
+                                <div class="testimonial-info">
+                                    <h4>Sarah Williams</h4>
+                                    <p data-lang-id="testimonial-2-role">Product Manager, TechInnovate</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p data-lang-id="testimonial-3">Cahya membantu kami membangun model risiko yang sangat akurat untuk portofolio investasi kami. Pengetahuan mendalamnya tentang pasar keuangan dan kemampuan analitisnya memberikan nilai tambah yang signifikan bagi bisnis kami.</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Client" class="testimonial-avatar">
+                                <div class="testimonial-info">
+                                    <h4>Robert Chen</h4>
+                                    <p data-lang-id="testimonial-3-role">Investment Director, Global Capital</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <div class="slider-dot active" data-index="0"></div>
+                    <div class="slider-dot" data-index="1"></div>
+                    <div class="slider-dot" data-index="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title" data-lang-id="contact-title">Hubungi Saya</h2>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name" data-lang-id="form-name">Nama</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-lang-id="form-email">Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject" data-lang-id="form-subject">Subjek</label>
+                        <input type="text" id="subject" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-lang-id="form-message">Pesan</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-block" data-lang-id="form-submit">Kirim Pesan</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Cahya<span>Portfolio</span></div>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/cahvaratrilukitaputri" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/cacastudymarket" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.instagram.com/cahyaratry__" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="mailto:cahvaratrilukitaputri@gmail.com"><i class="far fa-envelope"></i></a>
+                    <a href="https://wa.me/6281216631921" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+                <p class="copyright" data-lang-id="footer-copyright">© 2025 Cahya Ratri Lukita Putri. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Audio Element -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Loading Screen
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const loadingProgress = document.querySelector('.loading-progress');
+            const bgMusic = document.getElementById('bgMusic');
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    
+                    setTimeout(() => {
+                        loadingScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                            // Auto-play music after loading (with user interaction requirement)
+                            document.addEventListener('click', function initAudio() {
+                                bgMusic.volume = 0.3;
+                                bgMusic.play().catch(e => console.log('Audio play failed:', e));
+                                document.removeEventListener('click', initAudio);
+                            });
+                        }, 500);
+                    }, 500);
+                }
+                loadingProgress.style.width = `${progress}%`;
+            }, 200);
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            const icon = themeToggle.querySelector('i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // Language Toggle
+        const languageToggle = document.getElementById('languageToggle');
+        let currentLang = 'id';
+        
+        const translations = {
+            'id': {
+                'nav-about': 'Tentang',
+                'nav-skills': 'Keahlian',
+                'nav-experience': 'Pengalaman',
+                'nav-projects': 'Proyek',
+                'nav-testimonials': 'Testimoni',
+                'nav-contact': 'Kontak',
+                'hero-title': 'Data Analyst & Finance Specialist',
+                'hero-desc': 'Data Analyst & Finance Specialist dengan pengalaman kuat dalam analitik data, pelatihan AI keuangan perusahaan, trading kuantitatif, dan penelitian Web3. Terampil dalam mengubah kumpulan data kompleks menjadi dashboard yang berwawasan, model risiko, dan strategi keuangan.',
+                'about-title': 'Tentang Saya',
+                'about-desc1': 'Saya adalah seorang Data Analyst & Finance Specialist dengan pengalaman yang kuat di berbagai bidang seperti analitik data, pelatihan AI keuangan perusahaan, trading kuantitatif, dan penelitian Web3. Saya terampil dalam mengubah kumpulan data kompleks menjadi dashboard yang berwawasan, model risiko, dan strategi keuangan.',
+                'about-desc2': 'Saya berpengalaman bekerja secara remote dengan klien global dalam proyek yang melibatkan penelitian investasi, peramalan, anotasi AI/ML, dan optimasi kinerja. Saya mahir dalam Python, SQL, Power BI, Excel, dan Google Data Studio. Saya ahli dalam memberikan hasil yang terukur melalui ketepatan analitis dan pola pikir yang didorong oleh data.',
+                'skills-title': 'Keahlian',
+                'skills-programming': 'Pemrograman',
+                'skills-analytics': 'Analitik & Visualisasi',
+                'skills-finance': 'Keuangan & Trading',
+                'skills-web3': 'Web3 & Penelitian',
+                'skills-collaboration': 'Kolaborasi',
+                'skills-core': 'Keterampilan Inti',
+                'skill-data-analysis': 'Analisis Data',
+                'skill-financial-analysis': 'Analisis Keuangan',
+                'skill-quantitative-research': 'Penelitian Kuantitatif',
+                'skill-investment-analysis': 'Analisis Investasi',
+                'skill-business-analytics': 'Analisis Bisnis',
+                'skill-forecasting': 'Peramalan & Regresi',
+                'skill-dashboarding': 'Dashboard KPI',
+                'skill-risk-modeling': 'Pemodelan Risiko & Kinerja',
+                'experience-title': 'Pengalaman Kerja',
+                'exp-ai-trainer-desc': 'Melatih dan menguji model AI untuk meningkatkan pemahaman mereka tentang data keuangan dan analisis perusahaan.',
+                'exp-ai-trainer-1': 'Mengkurasi dan menganotasi kumpulan data keuangan besar untuk meningkatkan akurasi model AI dan kesadaran kontekstual.',
+                'exp-ai-trainer-2': 'Mengembangkan prompt dan use-case yang melibatkan valuasi, peramalan, dan pelaporan keuangan.',
+                'exp-ai-trainer-3': 'Berkolaborasi dengan insinyur dan ilmuwan data untuk menyempurnakan pemahaman model tentang istilah dan logika keuangan.',
+                'exp-ai-trainer-4': 'Meningkatkan akurasi model sebesar 18% dalam menafsirkan data keuangan perusahaan melalui evaluasi iteratif.',
+                'exp-web3-desc': 'Fokus pada penelitian kuantitatif dan kualitatif di Web3, blockchain, dan ekosistem crypto.',
+                'exp-web3-1': 'Melakukan analisis proyek DeFi dan Layer-2, mengidentifikasi aset berpotensi tinggi sebelum puncak pasar.',
+                'exp-web3-2': 'Menerapkan model kuantitatif dasar (volatilitas, korelasi, tren volume) untuk evaluasi proyek.',
+                'exp-web3-3': 'Meringkas wawasan dari berita crypto, sentimen sosial, dan data on-chain menjadi briefing investor mingguan.',
+                'exp-web3-4': 'Meningkatkan efisiensi penyaringan sebesar 25% dan memprediksi tren koin yang muncul 1-2 minggu lebih awal.',
+                'exp-ba-desc': 'Membantu bisnis kecil dalam perencanaan strategis berbasis data dan optimasi kinerja.',
+                'exp-ba-1': 'Melakukan analisis SWOT dan pasar untuk mengidentifikasi ketidakefisienan operasional dan potensi pertumbuhan.',
+                'exp-ba-2': 'Membuat laporan keuangan dan dashboard KPI (penjualan, margin, konversi, CAC) di Power BI.',
+                'exp-ba-3': 'Memberikan rekomendasi yang menghasilkan peningkatan penjualan sebesar 8% dan peningkatan ROI sebesar 12% dalam satu kuartal.',
+                'exp-da-1': 'Membersihkan, menggabungkan, dan menganalisis data multi-sumber dengan Python dan Google Sheets.',
+                'exp-da-2': 'Membangun dashboard Looker Studio interaktif untuk melacak KPI dan tren kinerja.',
+                'exp-da-3': 'Mengembangkan model peramalan yang mencapai akurasi ~90% dan meningkatkan ROI kampanye sebesar 15%.',
+                'exp-trader-desc': 'Mengelola perdagangan multi-aset dan portofolio investasi dengan manajemen risiko yang disiplin.',
+                'exp-trader-1': 'Perdagangan forex (EUR/USD, USD/JPY), indeks (NASDAQ, S&P 500), komoditas (XAU/USD), dan crypto (BTC/USD).',
+                'exp-trader-2': 'Menggunakan price action, RSI, EMA, MACD, dan indikator fundamental (NFP, CPI, FOMC).',
+                'exp-trader-3': 'Mencapai tingkat kemenangan 71%, ROI bulanan 5-9%, dan mempertahankan drawdown <12%.',
+                'exp-trader-4': 'Melakukan backtesting kuantitatif dan pelacakan kinerja untuk menyempurnakan aturan strategi, mengoptimalkan sinyal masuk/keluar, dan memastikan pengambilan keputusan berbasis data.',
+                'tools': 'Alat:',
+                'projects-title': 'Proyek',
+                'project-faang-desc': 'Membangun indeks tertimbang free-float market-cap untuk saham FAANG menggunakan Python yfinance dan Google Sheets. Mengotomatiskan pembersihan data, perhitungan bobot, dan pembaruan harian.',
+                'project-faang-ach': 'Mengotomatiskan perhitungan indeks dan menghasilkan wawasan kinerja portofolio yang dapat ditindaklanjuti.',
+                'project-kpi-desc': 'Membuat dashboard Power BI interaktif untuk melacak penjualan, margin, konversi, dan metrik kinerja utama lainnya. Menggabungkan data dari beberapa sumber (SQL, Excel, API).',
+                'project-kpi-ach': 'Meningkatkan visibilitas data dan mengurangi waktu pelaporan mingguan sebesar 60%.',
+                'project-risk-desc': 'Mengembangkan model risiko portofolio dengan Python untuk menganalisis volatilitas, Value at Risk (VaR), dan diversifikasi.',
+                'project-risk-ach': 'Mengidentifikasi risiko yang tidak terlihat dan mengoptimalkan alokasi aset untuk mengurangi volatilitas portofolio sebesar 18%.',
+                'project-web3-desc': 'Membangun dashboard penelitian Web3 yang menggabungkan data on-chain (Dune Analytics) dengan data pasar (CoinGecko API) untuk menganalisis tren DeFi dan NFT.',
+                'project-web3-ach': 'Mengidentifikasi peluang investasi yang menguntungkan sebelum tren utama dan meningkatkan ROI penelitian sebesar 25%.',
+                'achievements': 'Pencapaian:',
+                'testimonials-title': 'Testimoni Klien',
+                'testimonial-1': 'Cahya adalah seorang analis data yang luar biasa. Dia memberikan wawasan mendalam tentang data keuangan kami dan membantu kami meningkatkan efisiensi operasional secara signifikan. Pendekatannya yang detail dan kemampuan teknisnya sangat mengesankan.',
+                'testimonial-1-role': 'CEO, FinTech Solutions',
+                'testimonial-2': 'Bekerja dengan Cahya adalah pengalaman yang menyenangkan. Dia tidak hanya ahli dalam analisis data tetapi juga memahami kebutuhan bisnis kami. Dashboard yang dia buat membantu tim kami membuat keputusan yang lebih baik dan lebih cepat.',
+                'testimonial-2-role': 'Product Manager, TechInnovate',
+                'testimonial-3': 'Cahya membantu kami membangun model risiko yang sangat akurat untuk portofolio investasi kami. Pengetahuan mendalamnya tentang pasar keuangan dan kemampuan analitisnya memberikan nilai tambah yang signifikan bagi bisnis kami.',
+                'testimonial-3-role': 'Investment Director, Global Capital',
+                'contact-title': 'Hubungi Saya',
+                'form-name': 'Nama',
+                'form-email': 'Email',
+                'form-subject': 'Subjek',
+                'form-message': 'Pesan',
+                'form-submit': 'Kirim Pesan',
+                'footer-copyright': '© 2025 Cahya Ratri Lukita Putri. All rights reserved.'
+            },
+            'en': {
+                'nav-about': 'About',
+                'nav-skills': 'Skills',
+                'nav-experience': 'Experience',
+                'nav-projects': 'Projects',
+                'nav-testimonials': 'Testimonials',
+                'nav-contact': 'Contact',
+                'hero-title': 'Data Analyst & Finance Specialist',
+                'hero-desc': 'Data Analyst & Finance Specialist with strong experience in data analytics, corporate finance AI training, quantitative trading, and Web3 research. Skilled in transforming complex datasets into insightful dashboards, risk models, and financial strategies.',
+                'about-title': 'About Me',
+                'about-desc1': 'I am a Data Analyst & Finance Specialist with strong experience in various fields such as data analytics, corporate finance AI training, quantitative trading, and Web3 research. I am skilled in transforming complex datasets into insightful dashboards, risk models, and financial strategies.',
+                'about-desc2': 'I have experience working remotely with global clients on projects involving investment research, forecasting, AI/ML annotation, and performance optimization. I am proficient in Python, SQL, Power BI, Excel, and Google Data Studio. I excel at delivering measurable results through analytical precision and a data-driven mindset.',
+                'skills-title': 'Skills',
+                'skills-programming': 'Programming',
+                'skills-analytics': 'Analytics & Visualization',
+                'skills-finance': 'Finance & Trading',
+                'skills-web3': 'Web3 & Research',
+                'skills-collaboration': 'Collaboration',
+                'skills-core': 'Core Skills',
+                'skill-data-analysis': 'Data Analysis',
+                'skill-financial-analysis': 'Financial Analysis',
+                'skill-quantitative-research': 'Quantitative Research',
+                'skill-investment-analysis': 'Investment Analysis',
+                'skill-business-analytics': 'Business Analytics',
+                'skill-forecasting': 'Forecasting & Regression',
+                'skill-dashboarding': 'KPI Dashboarding',
+                'skill-risk-modeling': 'Risk & Performance Modeling',
+                'experience-title': 'Work Experience',
+                'exp-ai-trainer-desc': 'Training and testing AI models to improve their understanding of financial data and corporate analysis.',
+                'exp-ai-trainer-1': 'Curated and annotated large financial datasets to enhance AI model accuracy and contextual awareness.',
+                'exp-ai-trainer-2': 'Developed prompts and use-cases involving valuation, forecasting, and financial reporting.',
+                'exp-ai-trainer-3': 'Collaborated with engineers and data scientists to refine model understanding of financial terminology and logic.',
+                'exp-ai-trainer-4': 'Improved model accuracy by 18% in interpreting corporate financial data through iterative evaluation.',
+                'exp-web3-desc': 'Focused on quantitative and qualitative research in Web3, blockchain, and crypto ecosystems.',
+                'exp-web3-1': 'Conducted DeFi and Layer-2 project analysis, identifying high-potential assets before market peaks.',
+                'exp-web3-2': 'Applied basic quantitative models (volatility, correlation, volume trends) for project evaluation.',
+                'exp-web3-3': 'Summarized insights from crypto news, social sentiment, and on-chain data into weekly investor briefings.',
+                'exp-web3-4': 'Increased screening efficiency by 25% and predicted emerging coin trends 1-2 weeks early.',
+                'exp-ba-desc': 'Assisted small businesses in data-driven strategic planning and performance optimization.',
+                'exp-ba-1': 'Conducted SWOT and market analysis to identify operational inefficiencies and growth potential.',
+                'exp-ba-2': 'Built financial reports and KPI dashboards (sales, margins, conversion, CAC) in Power BI.',
+                'exp-ba-3': 'Provided recommendations that led to an 8% sales increase and 12% ROI improvement in one quarter.',
+                'exp-da-1': 'Cleaned, merged, and analyzed multi-source data using Python and Google Sheets.',
+                'exp-da-2': 'Built interactive Looker Studio dashboards to track KPIs and performance trends.',
+                'exp-da-3': 'Developed forecasting models achieving ~90% accuracy and increased campaign ROI by 15%.',
+                'exp-trader-desc': 'Managed multi-asset trading and investment portfolios with disciplined risk management.',
+                'exp-trader-1': 'Traded forex (EUR/USD, USD/JPY), indices (NASDAQ, S&P 500), commodities (XAU/USD), and crypto (BTC/USD).',
+                'exp-trader-2': 'Used price action, RSI, EMA, MACD, and fundamental indicators (NFP, CPI, FOMC).',
+                'exp-trader-3': 'Achieved 71% win rate, 5-9% monthly ROI, and maintained <12% drawdown.',
+                'exp-trader-4': 'Performed quantitative backtesting and performance tracking to refine strategy rules, optimize entry/exit signals, and ensure data-driven decision-making.',
+                'tools': 'Tools:',
+                'projects-title': 'Projects',
+                'project-faang-desc': 'Built a free-float market-cap weighted index for FAANG stocks using Python yfinance and Google Sheets. Automated data cleaning, weight calculations, and daily updates.',
+                'project-faang-ach': 'Automated index calculation and generated actionable portfolio performance insights.',
+                'project-kpi-desc': 'Created interactive Power BI dashboards to track sales, margins, conversion, and other key performance metrics. Integrated data from multiple sources (SQL, Excel, API).',
+                'project-kpi-ach': 'Improved data visibility and reduced weekly reporting time by 60%.',
+                'project-risk-desc': 'Developed portfolio risk models with Python to analyze volatility, Value at Risk (VaR), and diversification.',
+                'project-risk-ach': 'Identified hidden risks and optimized asset allocation to reduce portfolio volatility by 18%.',
+                'project-web3-desc': 'Built a Web3 research dashboard combining on-chain data (Dune Analytics) with market data (CoinGecko API) to analyze DeFi and NFT trends.',
+                'project-web3-ach': 'Identified profitable investment opportunities before major trends and increased research ROI by 25%.',
+                'achievements': 'Achievements:',
+                'testimonials-title': 'Client Testimonials',
+                'testimonial-1': 'Cahya is an exceptional data analyst. She provided deep insights into our financial data and helped us significantly improve operational efficiency. Her detailed approach and technical skills are highly impressive.',
+                'testimonial-1-role': 'CEO, FinTech Solutions',
+                'testimonial-2': 'Working with Cahya was a pleasure. She is not only skilled in data analysis but also understands our business needs. The dashboards she created helped our team make better and faster decisions.',
+                'testimonial-2-role': 'Product Manager, TechInnovate',
+                'testimonial-3': 'Cahya helped us build a highly accurate risk model for our investment portfolio. Her deep knowledge of financial markets and analytical capabilities provided significant added value to our business.',
+                'testimonial-3-role': 'Investment Director, Global Capital',
+                'contact-title': 'Contact Me',
+                'form-name': 'Name',
+                'form-email': 'Email',
+                'form-subject': 'Subject',
+                'form-message': 'Message',
+                'form-submit': 'Send Message',
+                'footer-copyright': '© 2025 Cahya Ratri Lukita Putri. All rights reserved.'
+            },
+            'zh': {
+                'nav-about': '关于',
+                'nav-skills': '技能',
+                'nav-experience': '经验',
+                'nav-projects': '项目',
+                'nav-testimonials': '推荐',
+                'nav-contact': '联系',
+                'hero-title': '数据分析师与金融专家',
+                'hero-desc': '数据分析师与金融专家，在数据分析、企业金融AI培训、量化交易和Web3研究方面拥有丰富经验。擅长将复杂数据集转化为有洞察力的仪表板、风险模型和金融策略。',
+                'about-title': '关于我',
+                'about-desc1': '我是一名数据分析师与金融专家，在数据分析、企业金融AI培训、量化交易和Web3研究等多个领域拥有丰富经验。我擅长将复杂数据集转化为有洞察力的仪表板、风险模型和金融策略。',
+                'about-desc2': '我有与全球客户远程合作的经验，参与涉及投资研究、预测、AI/ML注释和性能优化的项目。我精通Python、SQL、Power BI、Excel和Google Data Studio。我通过分析精度和数据驱动思维提供可衡量的结果。',
+                'skills-title': '技能',
+                'skills-programming': '编程',
+                'skills-analytics': '分析与可视化',
+                'skills-finance': '金融与交易',
+                'skills-web3': 'Web3与研究',
+                'skills-collaboration': '协作',
+                'skills-core': '核心技能',
+                'skill-data-analysis': '数据分析',
+                'skill-financial-analysis': '金融分析',
+                'skill-quantitative-research': '定量研究',
+                'skill-investment-analysis': '投资分析',
+                'skill-business-analytics': '业务分析',
+                'skill-forecasting': '预测与回归',
+                'skill-dashboarding': 'KPI仪表板',
+                'skill-risk-modeling': '风险与性能建模',
+                'experience-title': '工作经验',
+                'exp-ai-trainer-desc': '训练和测试AI模型，以提高其对财务数据和企业分析的理解。',
+                'exp-ai-trainer-1': '策划和注释大型财务数据集，以提高AI模型的准确性和上下文意识。',
+                'exp-ai-trainer-2': '开发涉及估值、预测和财务报告的提示和用例。',
+                'exp-ai-trainer-3': '与工程师和数据科学家合作，完善模型对财务术语和逻辑的理解。',
+                'exp-ai-trainer-4': '通过迭代评估，将模型解释企业财务数据的准确性提高了18%。',
+                'exp-web3-desc': '专注于Web3、区块链和加密生态系统的定量和定性研究。',
+                'exp-web3-1': '进行DeFi和Layer-2项目分析，在市场峰值前识别高潜力资产。',
+                'exp-web3-2': '应用基本定量模型（波动性、相关性、交易量趋势）进行项目评估。',
+                'exp-web3-3': '将来自加密新闻、社交情绪和链上数据的见解汇总成每周投资者简报。',
+                'exp-web3-4': '将筛选效率提高了25%，并提前1-2周预测新兴币种趋势。',
+                'exp-ba-desc': '协助小型企业进行数据驱动的战略规划和性能优化。',
+                'exp-ba-1': '进行SWOT和市场分析，以识别运营低效和增长潜力。',
+                'exp-ba-2': '在Power BI中构建财务报告和KPI仪表板（销售、利润率、转化率、CAC）。',
+                'exp-ba-3': '提供的建议在一个季度内使销售额增长了8%，投资回报率提高了12%。',
+                'exp-da-1': '使用Python和Google Sheets清理、合并和分析多源数据。',
+                'exp-da-2': '构建交互式Looker Studio仪表板以跟踪KPI和性能趋势。',
+                'exp-da-3': '开发预测模型，实现约90%的准确率，并将活动投资回报率提高了15%。',
+                'exp-trader-desc': '通过严格的风险管理管理多资产交易和投资组合。',
+                'exp-trader-1': '交易外汇（EUR/USD, USD/JPY）、指数（NASDAQ, S&P 500）、商品（XAU/USD）和加密货币（BTC/USD）。',
+                'exp-trader-2': '使用价格行为、RSI、EMA、MACD和基本面指标（NFP, CPI, FOMC）。',
+                'exp-trader-3': '实现71%的胜率，5-9%的月投资回报率，并保持<12%的最大回撤。',
+                'exp-trader-4': '执行定量回测和性能跟踪，以完善策略规则，优化入场/出场信号，并确保数据驱动的决策。',
+                'tools': '工具:',
+                'projects-title': '项目',
+                'project-faang-desc': '使用Python yfinance和Google Sheets为FAANG股票构建自由流通市值加权指数。自动化数据清理、权重计算和每日更新。',
+                'project-faang-ach': '自动化指数计算并生成可操作的投资组合性能洞察。',
+                'project-kpi-desc': '创建交互式Power BI仪表板以跟踪销售、利润率、转化率和其他关键性能指标。集成来自多个来源的数据（SQL, Excel, API）。',
+                'project-kpi-ach': '提高数据可见性并将每周报告时间减少60%。',
+                'project-risk-desc': '使用Python开发投资组合风险模型，以分析波动性、风险价值（VaR）和分散化。',
+                'project-risk-ach': '识别隐藏风险并优化资产配置，将投资组合波动性降低18%。',
+                'project-web3-desc': '构建Web3研究仪表板，结合链上数据（Dune Analytics）和市场数据（CoinGecko API）分析DeFi和NFT趋势。',
+                'project-web3-ach': '在主要趋势之前识别有利可图的投资机会，并将研究投资回报率提高25%。',
+                'achievements': '成就:',
+                'testimonials-title': '客户推荐',
+                'testimonial-1': 'Cahya是一位出色的数据分析师。她对我们的财务数据提供了深刻的见解，并帮助我们显著提高了运营效率。她细致的方法和技术能力令人印象深刻。',
+                'testimonial-1-role': 'CEO, FinTech Solutions',
+                'testimonial-2': '与Cahya合作非常愉快。她不仅精通数据分析，还理解我们的业务需求。她创建的仪表板帮助我们的团队做出更好更快的决策。',
+                'testimonial-2-role': '产品经理, TechInnovate',
+                'testimonial-3': 'Cahya帮助我们为投资组合构建了高度准确的风险模型。她对金融市场的深刻知识和分析能力为我们的业务提供了重要的附加价值。',
+                'testimonial-3-role': '投资总监, Global Capital',
+                'contact-title': '联系我',
+                'form-name': '姓名',
+                'form-email': '邮箱',
+                'form-subject': '主题',
+                'form-message': '消息',
+                'form-submit': '发送消息',
+                'footer-copyright': '© 2025 Cahya Ratri Lukita Putri. 保留所有权利。'
+            }
+        };
+        
+        languageToggle.addEventListener('click', function() {
+            if (currentLang === 'id') {
+                currentLang = 'en';
+            } else if (currentLang === 'en') {
+                currentLang = 'zh';
+            } else {
+                currentLang = 'id';
+            }
+            
+            updateLanguage(currentLang);
+        });
+        
+        function updateLanguage(lang) {
+            const elements = document.querySelectorAll('[data-lang-id]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-lang-id');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        // Mobile Menu
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenu.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+
+        // Testimonials Slider
+        const testimonialsSlider = document.getElementById('testimonialsSlider');
+        const sliderDots = document.querySelectorAll('.slider-dot');
+        let currentSlide = 0;
+        
+        function showSlide(index) {
+            testimonialsSlider.style.transform = `translateX(-${index * 100}%)`;
+            
+            sliderDots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            sliderDots[index].classList.add('active');
+            
+            currentSlide = index;
+        }
+        
+        sliderDots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                showSlide(index);
+            });
+        });
+        
+        // Auto slide
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % sliderDots.length;
+            showSlide(currentSlide);
+        }, 5000);
+
+        // Contact Form
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // In a real implementation, you would send this data to a server
+            // For demo purposes, we'll just show an alert and open WhatsApp
+            const whatsappMessage = `Name: ${name}%0AEmail: ${email}%0ASubject: ${subject}%0AMessage: ${message}`;
+            window.open(`https://wa.me/6281216631921?text=${whatsappMessage}`, '_blank');
+            
+            alert('Message sent! You will be redirected to WhatsApp.');
+            contactForm.reset();
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
